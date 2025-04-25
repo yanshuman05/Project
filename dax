@@ -1,0 +1,16 @@
+// Total Sales Measure
+Total Sales = SUM(Sales[SalesAmount])
+
+// Total Profit Measure
+Total Profit = SUM(Sales[Profit])
+
+// Sales Growth Measure
+Sales Growth = 
+    DIVIDE(
+        [Total Sales] - CALCULATE([Total Sales], PREVIOUSYEAR(Sales[Date])),
+        CALCULATE([Total Sales], PREVIOUSYEAR(Sales[Date])),
+        0
+    )
+
+// Profit Margin Measure
+Profit Margin = DIVIDE([Total Profit], [Total Sales], 0)
