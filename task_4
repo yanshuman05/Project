@@ -1,0 +1,25 @@
+-// dax 
+//Total Sales Measure
+Total Sales = SUM(Sales[SalesAmount])
+
+// Total Profit Measure
+Total Profit = SUM(Sales[Profit])
+
+// Sales Growth Measure
+Sales Growth = 
+    DIVIDE(
+        [Total Sales] - CALCULATE([Total Sales], PREVIOUSYEAR(Sales[Date])),
+        CALCULATE([Total Sales], PREVIOUSYEAR(Sales[Date])),
+        0
+    )
+
+// Profit Margin Measure
+Profit Margin = DIVIDE([Total Profit], [Total Sales], 0)
+//Tableau
+
+Total Sales = SUM([Sales])
+Total Profit = SUM([Profit])
+YoY Growth = 
+(SUM(IF YEAR([OrderDate]) = YEAR(TODAY()) THEN [Sales] END) - 
+SUM(IF YEAR([OrderDate]) = YEAR(TODAY()) - 1 THEN [Sales] END)) / 
+SUM(IF YEAR([OrderDate]) = YEAR(TODAY()) - 1 THEN [Sales] END)
